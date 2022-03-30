@@ -43,7 +43,7 @@ export default function board({ messages }) {
 }
 
 export const getServerSideProps = async () => {
-    const { data: messages } = await supabase.from("board_informatica").select("*")
+    const { data: messages } = await supabase.from("board").select("*")
 
     return {
         props: {
@@ -57,7 +57,7 @@ export const getServerSideProps = async () => {
 // )
 
 // export const getStaticProps = async () => {
-//     const { data: messages } = await supabase.from("board_informatica").select("*")
+//     const { data: messages } = await supabase.from("board").select("*")
 
 //     return {
 //         props: { messages },
