@@ -1,8 +1,11 @@
-import Head from 'next/head'
-import Link from 'next/link'
+import Head from 'next/head';
+import Link from 'next/link';
+import { useUser } from '../context/user';
 
 //fare statica
 export default function Home() {
+  const { user } = useUser();
+
   return (
     <div>
       <Head>
@@ -22,7 +25,7 @@ export default function Home() {
           <Link href={""}>Iscriviti</Link> o <Link href={""}>accedi</Link> alla piattaforma per vedere la tua bacheca.
         </p>
       </main>
-
+      
       <footer className='border-2 border-slate-300'>
         <a>
           Un progetto Togepi
