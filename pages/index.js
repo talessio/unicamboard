@@ -1,8 +1,8 @@
-import Head from 'next/head'
-import Link from 'next/link'
+import Head from 'next/head';
 
 //fare statica
 export default function Home() {
+
   return (
     <div>
       <Head>
@@ -18,9 +18,6 @@ export default function Home() {
         <h2 className='font-semibold text-slate-500 text-2xl'>
           <a>Benvenuto nella bacheca dell'UniCam!</a>
         </h2>
-        <p className='text-lg'>
-          <Link href={""}>Iscriviti</Link> o <Link href={""}>accedi</Link> alla piattaforma per vedere la tua bacheca.
-        </p>
       </main>
 
       <footer className='border-2 border-slate-300'>
