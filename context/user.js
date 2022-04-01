@@ -24,6 +24,7 @@ const Provider = ({ children }) => {
                     ...sessionUser,
                     ...profile,
                 });
+                router.push("/board")
             }
         };
 
