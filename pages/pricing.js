@@ -20,10 +20,10 @@ const Pricing = ({ plans }) => {
                     <div className='text-md'>
                         {plan.description}
                         <br />
-                        € {plan.price / 100}
-                        <br />
-                        <button className="py-5" onClick={processSubscription(plan.id)}>
-                            <a className="text-lg">{user ? "Acquista" : ""}</a>
+                        <button className="py-4" onClick={processSubscription(plan.id)}>
+                            € {plan.price / 100}
+                            <br />
+                            <a className="text-lg">Acquista</a>
                         </button>
                     </div>
                 </div>

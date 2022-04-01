@@ -17,7 +17,7 @@ export default function Nav() {
           <a>{user ? "Profilo" : ""}</a>
         </Link>
         <Link href={user ? '/logout' : '/login'}>
-          <a className="">{user ? "Esci" : "Accedi"}</a>
+          <a className="ml-auto">{user ? "Esci" : "Accedi"}</a>
         </Link>
       </ul>
     </nav>
