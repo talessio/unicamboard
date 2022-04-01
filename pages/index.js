@@ -1,10 +1,7 @@
 import Head from 'next/head';
-import Link from 'next/link';
-import { useUser } from '../context/user';
 
 //fare statica
 export default function Home() {
-  const { user } = useUser();
 
   return (
     <div>
@@ -21,11 +18,8 @@ export default function Home() {
         <h2 className='font-semibold text-slate-500 text-2xl'>
           <a>Benvenuto nella bacheca dell'UniCam!</a>
         </h2>
-        <p className='text-lg'>
-          <Link href={""}>Iscriviti</Link> o <Link href={""}>accedi</Link> alla piattaforma per vedere la tua bacheca.
-        </p>
       </main>
-      
+
       <footer className='border-2 border-slate-300'>
         <a>
           Un progetto Togepi
