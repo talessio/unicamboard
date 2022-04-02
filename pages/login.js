@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { useUser } from "../context/user";
 
 const Login = () => {
-    const { login } = useUser();
+    const { login, isLoading } = useUser();
 
     useEffect(login, []);
 
-    return <p>Logging in</p>;
+    return <p className="justify-center py-10 text-center">Sto facendo l'accesso</p>
 };
 
 export default Login;

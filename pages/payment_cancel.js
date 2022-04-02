@@ -1,5 +1,5 @@
 const Cancel = () => {
-    return <p>Pagamento annullato. Non ti è stato addebitato nulla!</p>;
+    return <p className="justify-center py-10 text-center">Pagamento annullato. Non ti è stato addebitato nulla!</p>;
 };
 
 export default Cancel;

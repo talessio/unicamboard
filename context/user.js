@@ -6,8 +6,9 @@ import axios from "axios";
 const Context = createContext();
 
 const Provider = ({ children }) => {
-    const router = useRouter();
     const [user, setUser] = useState(supabase.auth.user());
+    const [isLoading, setIsLoading] = useState(true);
+    const router = useRouter();
 
     useEffect(() => {
         const getUserProfile = async () => {
@@ -24,6 +25,8 @@ const Provider = ({ children }) => {
                     ...sessionUser,
                     ...profile,
                 });
+                router.push('/board');
+                setIsLoading(false);
             }
         };
 
@@ -57,6 +60,7 @@ const Provider = ({ children }) => {
         user,
         login,
         logout,
+        isLoading,
     };
 
     return <Context.Provider value={exposed}>{children}</Context.Provider>;

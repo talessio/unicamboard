@@ -1,7 +1,10 @@
 import Head from 'next/head';
+// import { useUser } from '../context/user';
+// import Link from 'next/link';
 
 //fare statica
 export default function Home() {
+  // const { user } = useUser();
 
   return (
     <div>
@@ -18,13 +21,18 @@ export default function Home() {
         <h2 className='font-semibold text-slate-500 text-2xl'>
           <a>Benvenuto nella bacheca dell'UniCam!</a>
         </h2>
+        {/* <div className="font-bold text-5xl">
+          <Link href="/board">
+            <a>{user ? "Accedi alla tua bacheca!" : ""}</a>
+          </Link>
+        </div> */}
       </main>
 
-      <footer className='border-2 border-slate-300'>
+      <div className='border-y-2 border-slate-300 text-center p-5'>
         <a>
           Un progetto Togepi
         </a>
-      </footer>
+      </div>
     </div>
   )
 }

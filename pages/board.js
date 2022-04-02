@@ -3,7 +3,6 @@ import { supabase } from "../utils/supabase";
 import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
 
 export default function board({ messages }) {
-    console.log(messages);
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <Header />
