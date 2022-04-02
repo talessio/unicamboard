@@ -10,7 +10,7 @@ const Provider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true);
     const router = useRouter();
 
-    useEffect(() => {
+    useEffect(() => { //quando il browser costruisce la componente react nella pagina vista dall'utente esegui la funzione getUserProfile()
         const getUserProfile = async () => {
             const sessionUser = supabase.auth.user();
 
@@ -22,17 +22,16 @@ const Provider = ({ children }) => {
                     .single();
 
                 setUser({
-                    ...sessionUser,
-                    ...profile,
+                    ...sessionUser, //prendo tutti i campi dell'utente che ha fatto login
+                    ...profile,     //prendo tutti i campi dell'utente nella tabella profile di supabase
                 });
-                router.push('/board');
                 setIsLoading(false);
             }
         };
 
         getUserProfile();
 
-        supabase.auth.onAuthStateChange(() => {
+        supabase.auth.onAuthStateChange(() => { //callback
             getUserProfile();
         });
     }, []);
@@ -47,7 +46,7 @@ const Provider = ({ children }) => {
     const login = async () => {
         await supabase.auth.signIn({
             provider: "google",
-        });
+        },{redirectTo: "http://localhost:3000/board"});
     };
 
     const logout = async () => {
