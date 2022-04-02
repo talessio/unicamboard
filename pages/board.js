@@ -9,7 +9,7 @@ export default function board({ messages }) {
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <Header />
             <InputMessage />
-            <div className="w-full border-2 border-slate-300 rounded-xl max-w-4xl flex flex-col space-y-4">
+            <div className="w-full border-slate-300 rounded-xl max-w-4xl flex flex-col space-y-4">
                 {messages.map((message) => (
                     <div className="rounded-xl m-8 p-8 md:p-4 shadow-sm shadow-slate-300" key={message.engagement}>
                         <div className="flex justify-between h-24 rounded-full mx-auto">
