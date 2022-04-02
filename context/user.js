@@ -46,7 +46,7 @@ const Provider = ({ children }) => {
     const login = async () => {
         await supabase.auth.signIn({
             provider: "google",
-        },{redirectTo: "http://localhost:3000/board"});
+        }, { redirectTo: "http://localhost:3000/board" });
     };
 
     const logout = async () => {
