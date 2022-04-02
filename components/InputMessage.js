@@ -3,12 +3,18 @@ import { supabase } from "../utils/supabase";
 export default function InputMessage() {
     return (
         <div className="rounded-l py-2 px-4 font-medium">
-            <form onSubmit={ SendMessage }>
+            <form onSubmit={SendMessage}>
                 <input className="border-b-2"
+                    type="text"
+                    name="title"
+                    id="title"
                     placeholder="Titolo"
                 />
                 <br></br>
                 <input className="border-b-2"
+                    type="text"
+                    name="body"
+                    id="body"
                     placeholder="Corpo"
                 />
             </form>
@@ -19,11 +25,15 @@ export default function InputMessage() {
     )
 }
 
-const SendMessage = async () => {
-    const { message, error } = await supabase
-        .from("board")
-        .insert([
-            { title: "", body: "", engagement: 0 }
-        ])
+export function SendMessage({ message }) {
     console.log({ message })
+    const send = async () => {
+        const { data, error } = await supabase
+            .from("board")
+            .insert([
+                { title: message.title, body: message.body }
+            ])
+        console.log(data, error)
+    }
+    send()
 }
