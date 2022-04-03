@@ -13,9 +13,6 @@ export default function Nav() {
         <Link href="/pricing">
           <a>{user ? "Pagamenti" : ""}</a>
         </Link>
-        <Link href="">
-          <a>{user ? "Profilo" : ""}</a>
-        </Link>
         <Link href={user ? '/logout' : '/login'}>
           <a className="">{user ? "Esci" : "Accedi"}</a>
         </Link>

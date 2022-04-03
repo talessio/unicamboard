@@ -14,16 +14,24 @@ const Provider = ({ children }) => {
             const sessionUser = supabase.auth.user();
 
             if (sessionUser) {
-                const { data: profile } = await supabase
-                    .from("profile")
-                    .select("*")
-                    .eq("id", sessionUser.id)
-                    .single();
+                if (sessionUser.email.includes("@studenti.unicam.it")) {  // controllo email
+                    const { data: profile } = await supabase
+                        .from("profile")
+                        .select("*")
+                        .eq("id", sessionUser.id)
+                        .single();
 
-                setUser({
-                    ...sessionUser,
-                    ...profile,
-                });
+                    setUser({
+                        ...sessionUser,
+                        ...profile,
+                    });
+                    router.push("/board");   // todo sostituire con quello di ale
+                }
+                else {
+                    logout;
+                    console.log("Only Unicam email are allowed!");   // commentino
+                    router.push("/invalidEmail");// todo sostituire con quello di ale
+                }
             }
         };
 
