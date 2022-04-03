@@ -4,18 +4,16 @@ import { supabase } from "../utils/supabase";
 export default function InputMessage() {
 
     const [loading, setLoading] = useState(false)
-    const [title, setTitle] = useState("")
-    const [body, setBody] = useState("")
+    const [message, setTitle] = useState("")
 
-    const send = async (title, body) => {
+    const send = async (message) => {
         try {
             setLoading(true)
-            if (title === "" || body === "") throw new Error("Titolo e corpo devono essere entrambi compilati")
+            if (message === "") throw new Error("Il testo è vuoto")
             const { error } = await supabase
-                .from("board")
+                .from("board")  //Nome della tabella dove sarà salvato il testo
                 .insert({
-                    title,
-                    body
+                    message
                 })
             if (error) throw error
             alert("Il tuo messaggio è stato mandato!")
@@ -31,18 +29,9 @@ export default function InputMessage() {
             <div>
                 <input className="border-b-2"
                     type="text"
-                    placeholder="Oggetto"
-                    value={title}
+                    placeholder="Scrivi qui..."
+                    value={message}
                     onChange={(e) => setTitle(e.target.value)}
-                />
-            </div>
-            <br></br>
-            <div>
-                <input className="border-b-2"
-                    type="text"
-                    placeholder="Corpo"
-                    value={body}
-                    onChange={(e) => setBody(e.target.value)}
                 />
             </div>
             <br></br>
@@ -50,12 +39,12 @@ export default function InputMessage() {
                 <button
                     onClick={(e) => {
                         e.preventDefault()
-                        send(title, body)
+                        send(message)
                     }}
                     className="py-4 text-sm font-medium"
                     disabled={loading}
                 >
-                    <span>{loading ? "Mandando..." : "Manda il tuo messaggio"}</span>
+                    <span>{loading ? "Mandando..." : "Manda"}</span>
                 </button>
             </div>
         </div>
