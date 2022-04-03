@@ -34,7 +34,6 @@ export default function InputMessage() {
                     onChange={(e) => setTitle(e.target.value)}
                 />
             </div>
-            <br></br>
             <div>
                 <button
                     onClick={(e) => {

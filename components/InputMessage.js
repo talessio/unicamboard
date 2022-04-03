@@ -10,7 +10,7 @@ export default function InputMessage() {
     const send = async (title, body) => {
         try {
             setLoading(true)
-            if (title === "" || body === "") throw new Error("Titolo e corpo devono essere entrambi compilati")
+            if (title === "" || body === "") throw new Error("Titolo e corpo devono essere entrambi compilati!")
             const { error } = await supabase
                 .from("board")
                 .insert({
@@ -18,11 +18,13 @@ export default function InputMessage() {
                     body
                 })
             if (error) throw error
-            alert("Il tuo messaggio è stato mandato!")
+            alert("Il tuo messaggio è stato mandato! Ricarica la pagina per visualizzarlo sulla home.")
         } catch (error) {
             alert(error.message)
         } finally {
             setLoading(false)
+            setTitle("")
+            setBody("")
         }
     }
 
@@ -45,7 +47,6 @@ export default function InputMessage() {
                     onChange={(e) => setBody(e.target.value)}
                 />
             </div>
-            <br></br>
             <div>
                 <button
                     onClick={(e) => {
