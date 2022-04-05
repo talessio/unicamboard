@@ -1,6 +1,6 @@
 import Header from "../components/Header"
 import { supabase } from "../utils/supabase";
-import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
+import LikeButton from "../components/LikeButton";
 
 export default function board({ messages }) {
     console.log(messages);
@@ -19,9 +19,9 @@ export default function board({ messages }) {
                         </div>
                         <div className="flex flex-col items-center py-2">
                             <p className="text-md font-thin">{message.body}</p>
-                            <button className="hover:text-pink-400 font-extrabold self-center">
-                                <BsSuitHeart />
-                            </button>
+                        </div>
+                        <div>
+                            <LikeButton />
                         </div>
                     </div>
                 ))}
