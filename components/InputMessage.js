@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { useUser } from "../context/user";
 import { supabase } from "../utils/supabase";
 
 export default function InputMessage() {
-    const sessionUser = supabase.auth.user()
-    const [loading, setLoading] = useState(false)
+    const { user } = useUser();
+    // if (!user) return null;
+    const id = user.id;     //ROMPE IL SITO: passare per /index prima di andare su /board
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const send = async (title, body) => {
         try {
@@ -14,8 +17,9 @@ export default function InputMessage() {
             const { error } = await supabase
                 .from("board")
                 .insert({
-                    title,
-                    body
+                    title: title,
+                    body: body,
+                    profile_id: id
                 })
             if (error) throw error
             alert("Il tuo messaggio è stato mandato! Ricarica la pagina per visualizzarlo sulla home.")
@@ -30,8 +34,7 @@ export default function InputMessage() {
 
     return (
         <div className="rounded-l py-2 px-4 font-medium">
-            <p>utente: {sessionUser.email}</p>
-            <p>id: {sessionUser.id}</p>
+            <p>utente: {user ? user.email : "ospite"}</p>
             <div>
                 <input className="border-b-2"
                     type="text"
