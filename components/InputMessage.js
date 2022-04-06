@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { supabase } from "../utils/supabase";
-import { useUser } from "../context/user";
 
 export default function InputMessage() {
-    const { user } = useUser();     //to be used to properly insert profile_id field into db 
+    const sessionUser = supabase.auth.user()
     const [loading, setLoading] = useState(false)
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
@@ -31,6 +30,8 @@ export default function InputMessage() {
 
     return (
         <div className="rounded-l py-2 px-4 font-medium">
+            <p>utente: {sessionUser.email}</p>
+            <p>id: {sessionUser.id}</p>
             <div>
                 <input className="border-b-2"
                     type="text"
