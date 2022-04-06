@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { supabase } from "../utils/supabase";
+import { useUser } from "../context/user";
 
 export default function InputMessage() {
-
+    const { user } = useUser();     //to be used to properly insert profile_id field into db 
     const [loading, setLoading] = useState(false)
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
