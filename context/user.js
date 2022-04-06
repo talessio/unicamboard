@@ -12,6 +12,12 @@ const Provider = ({ children }) => {
     useEffect(() => {
         const getUserProfile = async () => {
             const sessionUser = supabase.auth.user();
+            /**
+             * Provare a controllare che la mail sia corretta prima di restituire un oggetto user,
+             * se una mail non e' valida non dovremmo eseguire per niente supabase.auth.user();
+             * 
+             * Probabile dentro signIn da controllare?????
+             */
 
             if (sessionUser) {
                 if (sessionUser.email.includes("@studenti.unicam.it")) {  // controllo email
@@ -30,7 +36,8 @@ const Provider = ({ children }) => {
                 else {
                     logout;
                     console.log("Only Unicam email are allowed!");   // commentino
-                    router.push("/invalidEmail");// todo sostituire con quello di ale
+                    redirectTo: "http://localhost:3000/invalid-email" ; 
+                    router.push("/invalid-email");// todo sostituire con quello di ale
                 }
             }
         };

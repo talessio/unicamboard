@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 function invalidEmail() {
     return (
         <div>
@@ -6,7 +8,12 @@ function invalidEmail() {
                     <a>Email non valida!</a>
                 </h1>
                 <h2 className='font-semibold text-slate-500 text-2xl'>
-                    <a>Puoi accedere solo con delle email UniCam</a>
+                    <a>Puoi accedere solo con delle email UniCam,  </a>
+
+                    <Link href={'/'}>
+                        <a>clicca qui per tornare alla Home</a>
+                    </Link>
+
                 </h2>
             </main>
         </div >

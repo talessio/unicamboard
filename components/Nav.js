@@ -13,6 +13,9 @@ export default function Nav() {
         <Link href="/pricing">
           <a>{user ? "Pagamenti" : ""}</a>
         </Link>
+        <Link href={'/contact-admin'}>
+          <a className="">{"Contattaci"}</a>
+        </Link>
         <Link href={user ? '/logout' : '/login'}>
           <a className="">{user ? "Esci" : "Accedi"}</a>
         </Link>
