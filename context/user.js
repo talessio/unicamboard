@@ -36,7 +36,7 @@ const Provider = ({ children }) => {
                 else {
                     logout;
                     console.log("Only Unicam email are allowed!");   // commentino
-                    redirectTo: "http://localhost:3000/invalid-email" ; 
+                    redirectTo: "http://localhost:3000/invalid-email";
                     router.push("/invalid-email");// todo sostituire con quello di ale
                 }
             }
@@ -57,9 +57,11 @@ const Provider = ({ children }) => {
     }, [user]);
 
     const login = async () => {
-        await supabase.auth.signIn({
-            provider: "google",
-        });
+        //if (email.includes("@studenti.unicam.it")) {
+            await supabase.auth.signIn({
+                provider: "google",
+            });
+        //}
     };
 
     const logout = async () => {

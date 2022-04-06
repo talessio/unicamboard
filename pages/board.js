@@ -1,6 +1,6 @@
 import Header from "../components/Header"
 import { supabase } from "../utils/supabase";
-import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
+import { BsSuitHeart } from "react-icons/bs";
 
 export default function board({ messages }) {
     console.log(messages);
