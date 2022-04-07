@@ -3,32 +3,43 @@ import { useState } from "react";
 import { useUser } from "../context/user";
 import { supabase } from "../utils/supabase";
 
-export default function LikeButton({ message }) {
+const LikeButton = ({ message }) => {
     const { user } = useUser();
     const [liked, setLiked] = useState(false)
-    const [likeCount, setLikeCount] = useState(message.n_likes) //n_likes ancora non funziona
+    const [likeCount, setLikeCount] = useState(message.n_likes) 
     const [loading, setLoading] = useState(false)
+    //TODO fix console error: invalid input syntax for type uuid: "null"
 
     const initializeCount = async () => {
         const postId = message ? message.id : null;
-        const { data, error, count } = await supabase
-            .from("like")
-            .select("id", { count: "exact" })
-            .eq("post_id", postId)
-        setLikeCount(count)
+        try {
+            const { error, count } = await supabase
+                .from("like")
+                .select("id", { count: "exact" })
+                .eq("post_id", postId)
+            if (error) throw error
+            setLikeCount(count)
+        } catch (error) {
+            console.error(error.message)
+        }
     }
 
     const initializeButton = async () => {
         const id = user ? user.id : null;
         const postId = message ? message.id : null;
-        const { data, error, count } = await supabase
-            .from("like")
-            .select("profile_id", { count: "exact" })
-            .eq("profile_id", id)
-            .eq("post_id", postId)
-        if (count > 0) {
-            setLiked(true)
-        } 
+        try {
+            const { error, count } = await supabase
+                .from("like")
+                .select("profile_id", { count: "exact" })
+                .eq("profile_id", id)
+                .eq("post_id", postId)
+            if (error) throw error
+            if (count > 0) {
+                setLiked(true)
+            }
+        } catch (error) {
+            console.error(error.message)
+        }
         initializeCount()
     }
 
@@ -47,10 +58,10 @@ export default function LikeButton({ message }) {
                         post_id: postId
                     })
                 if (error) throw error
-                setLikeCount(likeCount + 1)
             } catch (error) {
-                alert(error)
+                console.error(error.message)
             } finally {
+                setLikeCount(likeCount + 1)
                 setLoading(false)
                 setLiked(true)
             }
@@ -67,7 +78,7 @@ export default function LikeButton({ message }) {
                 if (error) throw error
                 setLikeCount(likeCount - 1)
             } catch (error) {
-                alert(error)
+                console.error(error.message)
             } finally {
                 setLoading(false)
                 setLiked(false)
@@ -89,3 +100,5 @@ export default function LikeButton({ message }) {
         </div>
     )
 }
+
+export default LikeButton;
