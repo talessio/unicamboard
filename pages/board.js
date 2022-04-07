@@ -3,7 +3,6 @@ import { supabase } from "../utils/supabase";
 import LikeButton from "../components/LikeButton";
 
 export default function board({ messages }) {
-    console.log(messages);
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <Header />
@@ -21,7 +20,7 @@ export default function board({ messages }) {
                             <p className="text-md font-thin">{message.body}</p>
                         </div>
                         <div>
-                            <LikeButton />
+                            <LikeButton postId={message.id}/>
                         </div>
                     </div>
                 ))}

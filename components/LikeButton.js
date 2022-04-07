@@ -1,24 +1,59 @@
 import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
 import { useState } from "react";
-import { supabase } from "../utils/supabase"; //to be used
+import { useUser } from "../context/user";
+import { supabase } from "../utils/supabase";
 
-export default function LikeButton() {
+export default function LikeButton({ postId }) {
+    const { user } = useUser();
+    const id = user ? user.id : null;
+    console.log(postId);
     const [liked, setLiked] = useState(false)
     const [likeCount, setLikeCount] = useState(0)
+    const [loading, setLoading] = useState(false)
 
-    function like() {
+    const handleLike = async () => {
         if (!liked) {
-            setLiked(true)
-            setLikeCount(likeCount + 1)
+            try {
+                setLoading(true)
+                const { error } = await supabase
+                    .from("like")
+                    .insert({
+                        profile_id: id,
+                        post_id: postId //rivadsf
+                    })
+                if (error) throw error
+                setLikeCount(likeCount + 1)
+            } catch (error) {
+                alert(error)
+            } finally {
+                setLoading(false)
+            }
         } else {
-            setLiked(false)
-            setLikeCount(likeCount - 1)
+            try {
+                setLoading(true)
+                const { error } = await supabase
+                    .from("like")
+                    .delete()
+                    .match({
+                        profile_id: id,
+                        post_id: postId //jdnjdfad
+                    })
+                if (error) throw error
+                setLikeCount(likeCount + 1)
+            } catch (error) {
+                alert(error)
+            } finally {
+                setLoading(false)
+            }
         }
     }
 
     return (
         <div>
-            <button onClick={like}>
+            <button onClick={(e) => {
+                e.preventDefault()
+                handleLike
+            }}>
                 <span>{liked ? <BsSuitHeartFill /> : <BsSuitHeart />}</span>
             </button>
             <p>
