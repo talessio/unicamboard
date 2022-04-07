@@ -1,10 +1,10 @@
 import { useState } from "react";
-//import { useUser } from "react";
+import { useUser } from "../context/user";
 import { supabase } from "../utils/supabase";
 
 export default function contactAdmin() {
-    // TODO risolvere (sentire mike), serve veramente?
-    //const { user } = useUser();    // to be used to properly insert profile_id field into db 
+    const { user } = useUser();    // to be used to properly insert profile_id field into db 
+    const id = user ? user.id : null;
     const [loading, setLoading] = useState(false)
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
@@ -16,9 +16,9 @@ export default function contactAdmin() {
             const { error } = await supabase
                 .from("admin_requests")  // tabella con messaggi diretti all'amministrazione
                 .insert({
-                    //user,   // non inserisce effettivamente il profile_id nemmeno usando user al posto di profile_id
-                    body,
-                    title
+                    profile_id: id,   // non inserisce effettivamente il profile_id nemmeno usando user al posto di profile_id
+                    body: body,
+                    title: title
                 })
             if (error) throw error
             alert("Il tuo messaggio è stato mandato! L'amministrazione lo visualizzerà il prima possibile.")
