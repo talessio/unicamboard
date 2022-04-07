@@ -1,17 +1,19 @@
-import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
+import { BsSuitHeart, BsFillSuitHeartFill } from "react-icons/bs";
 import { useState } from "react";
 import { useUser } from "../context/user";
 import { supabase } from "../utils/supabase";
 
-export default function LikeButton({ postId }) {
+export default function LikeButton({ message }) {
     const { user } = useUser();
-    const id = user ? user.id : null;
-    console.log(postId);
+    // const id = user ? user.id : null;
+    console.log(message.id);
     const [liked, setLiked] = useState(false)
-    const [likeCount, setLikeCount] = useState(0)
+    const [likeCount, setLikeCount] = useState(message.n_likes) //n_likes ancora non funziona
     const [loading, setLoading] = useState(false)
 
     const handleLike = async () => {
+        const id = user ? user.id : null;
+        const postId = message ? message.id : null;
         if (!liked) {
             try {
                 setLoading(true)
@@ -19,7 +21,7 @@ export default function LikeButton({ postId }) {
                     .from("like")
                     .insert({
                         profile_id: id,
-                        post_id: postId //rivadsf
+                        post_id: postId
                     })
                 if (error) throw error
                 setLikeCount(likeCount + 1)
@@ -27,6 +29,7 @@ export default function LikeButton({ postId }) {
                 alert(error)
             } finally {
                 setLoading(false)
+                setLiked(true)
             }
         } else {
             try {
@@ -36,14 +39,15 @@ export default function LikeButton({ postId }) {
                     .delete()
                     .match({
                         profile_id: id,
-                        post_id: postId //jdnjdfad
+                        post_id: postId
                     })
                 if (error) throw error
-                setLikeCount(likeCount + 1)
+                setLikeCount(likeCount - 1)
             } catch (error) {
                 alert(error)
             } finally {
                 setLoading(false)
+                setLiked(false)
             }
         }
     }
@@ -52,13 +56,13 @@ export default function LikeButton({ postId }) {
         <div>
             <button onClick={(e) => {
                 e.preventDefault()
-                handleLike
-            }}>
-                <span>{liked ? <BsSuitHeartFill /> : <BsSuitHeart />}</span>
+                handleLike()
+            }}
+                disabled={loading}
+            >
+                <span>{liked ? <BsFillSuitHeartFill color="red" /> : <BsSuitHeart />}</span>
             </button>
-            <p>
-                Likes: {likeCount}
-            </p>
+            <p>Likes: {likeCount}</p>
         </div>
     )
 }

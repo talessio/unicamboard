@@ -20,7 +20,7 @@ export default function board({ messages }) {
                             <p className="text-md font-thin">{message.body}</p>
                         </div>
                         <div>
-                            <LikeButton postId={message.id}/>
+                            <LikeButton message={message} />
                         </div>
                     </div>
                 ))}
