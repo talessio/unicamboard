@@ -4,8 +4,7 @@ import { supabase } from "../utils/supabase";
 
 export default function InputMessage() {
     const { user } = useUser();
-    // if (!user) return null;
-    const id = user.id;     //ROMPE IL SITO: passare per /index prima di andare su /board
+    const id = user ? user.id : null;
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
     const [loading, setLoading] = useState(false)
