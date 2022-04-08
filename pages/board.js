@@ -6,7 +6,7 @@ import {
   FaHeartBroken,
   FaRegArrowAltCircleDown,
   FaArrowAltCircleDown,
-} from "react-icons/bs";
+} from "react-icons/fa";
 
 export default function board({ messages }) {
   return (
