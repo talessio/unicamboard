@@ -27,7 +27,7 @@ export default function InputMessage() {
             setLoading(true)
             if (personalisedId === "") throw new Error("Il campo non può essere vuoto!")
             const { error } = await supabase
-                .from("board")
+                .from("post")
                 .update({ personalised_id: { personalisedId } })
                 .eq("id", user.id);
             if (error) throw error
