@@ -1,10 +1,9 @@
 import Header from "../components/Header"
 import InputMessage from "../components/InputMessage";
 import { supabase } from "../utils/supabase";
-import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
+import { BsSuitHeart } from "react-icons/bs";
 
 export default function board({ messages }) {
-    console.log(messages);
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <Header />
@@ -33,7 +32,7 @@ export default function board({ messages }) {
 }
 
 export const getServerSideProps = async () => {
-    const { data: messages } = await supabase.from("board").select("*")
+    const { data: messages } = await supabase.from("post").select("*")
 
     const sortedMessages = messages.sort((a, b) => a.engagement + b.engagement);
 

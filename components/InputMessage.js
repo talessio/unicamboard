@@ -14,7 +14,7 @@ export default function InputMessage() {
             setLoading(true)
             if (title === "" || body === "") throw new Error("Titolo e corpo devono essere entrambi compilati!")
             const { error } = await supabase
-                .from("board")
+                .from("post")
                 .insert({
                     title: title,
                     body: body,
@@ -44,8 +44,7 @@ export default function InputMessage() {
             </div>
             <br></br>
             <div>
-                <input className="border-b-2"
-                    type="text"
+                <textarea className="border-b-2"
                     placeholder="Corpo"
                     value={body}
                     onChange={(e) => setBody(e.target.value)}

@@ -11,7 +11,7 @@ export default function InputMessage() {
             setLoading(true)
             if (message === "") throw new Error("Il testo è vuoto")
             const { error } = await supabase
-                .from("board")  //Nome della tabella dove sarà salvato il testo
+                .from("post")  //Nome della tabella dove sarà salvato il testo
                 .insert({
                     message
                 })
