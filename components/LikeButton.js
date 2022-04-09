@@ -1,4 +1,10 @@
-import { BsSuitHeart, BsFillSuitHeartFill } from "react-icons/bs";
+import {
+    FaRegHeart,
+    FaHeart,
+    // FaHeartBroken,
+    // FaRegArrowAltCircleDown,
+    // FaArrowAltCircleDown,
+} from "react-icons/fa";
 import { useState } from "react";
 import { useUser } from "../context/user";
 import { supabase } from "../utils/supabase";
@@ -76,10 +82,10 @@ const LikeButton = ({ message }) => {
                         post_id: postId
                     })
                 if (error) throw error
-                setLikeCount(likeCount - 1)
             } catch (error) {
                 console.error(error.message)
             } finally {
+                setLikeCount(likeCount - 1)
                 setLoading(false)
                 setLiked(false)
             }
@@ -94,7 +100,7 @@ const LikeButton = ({ message }) => {
             }}
                 disabled={loading}
             >
-                <span>{liked ? <BsFillSuitHeartFill color="red" /> : <BsSuitHeart />}</span>
+                <span className="text-pink-400">{liked ? <FaHeart /> : <FaRegHeart />}</span>
             </button>
             <p>Likes: {likeCount}</p>
         </div>

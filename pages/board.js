@@ -30,7 +30,7 @@ export default function board({ messages }) {
 }
 
 export const getServerSideProps = async () => {
-    const { data: messages } = await supabase.from("board").select("*")
+    const { data: messages } = await supabase.from("post").select("*")
 
     const sortedMessages = messages.sort((a, b) => a.engagement + b.engagement);
 
