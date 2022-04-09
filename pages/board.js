@@ -1,6 +1,7 @@
 import Header from "../components/Header"
 import { supabase } from "../utils/supabase";
 import LikeButton from "../components/LikeButton";
+import DownvoteButton from "../components/DownvoteButton";
 
 export default function board({ messages }) {
     return (
@@ -20,7 +21,7 @@ export default function board({ messages }) {
                             <p className="text-md font-thin">{message.body}</p>
                         </div>
                         <div>
-                            <LikeButton message={message} />
+                            <LikeButton message={message} /> <DownvoteButton message={message} />
                         </div>
                     </div>
                 ))}
