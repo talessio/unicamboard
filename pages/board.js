@@ -1,7 +1,11 @@
 import Header from "../components/Header"
 import { supabase } from "../utils/supabase";
-import LikeButton from "../components/LikeButton";
-import DownvoteButton from "../components/DownvoteButton";
+//import LikeButton from "../components/LikeButton";
+//import DownvoteButton from "../components/DownvoteButton";
+import {
+    LikeButton,
+    DownvoteButton
+} from "../components/MessageButtons";
 
 export default function board({ messages }) {
     return (
