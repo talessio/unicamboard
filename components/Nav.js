@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from "next/link";
 import { useUser } from "../context/user";
 
 export default function Nav() {
@@ -19,19 +19,12 @@ export default function Nav() {
             </Link>
           </div>
         )}
-        {!!user && (
-          <div className="ml-2">
-            <Link href="/profile">
-              <a>Profilo</a>
-            </Link>
-          </div>
-        )}
         <div>
-          <Link href={user ? '/logout' : '/login'}>
+          <Link href={user ? "/logout" : "/login"}>
             <a>{user ? "Esci" : "Accedi"}</a>
           </Link>
         </div>
       </ul>
     </nav>
-  )
+  );
 }
