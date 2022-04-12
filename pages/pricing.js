@@ -35,17 +35,6 @@ const Pricing = ({ plans }) => {
           </div>
         ))}
       </div>
-      <div className="text-center">
-        ----- visualizza solo se utente ha pagato -----
-        <div className="w-90 max-w-3xl mx-auto py-16 flex justify-around">
-          <div className="h-auto w-64 rounded text-center shadow px-6 py-4">
-            <h2 className="font-semibold text-slate-500 text-2xl">
-              Cambia la tua id:
-            </h2>
-            <div className="text-md">[box per cambiamento id]</div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
