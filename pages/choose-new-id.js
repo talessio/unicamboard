@@ -1,38 +1,29 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { supabase } from "../utils/supabase";
-import cookie from "cookie";
 import { useUser } from "../context/user";
+import { supabase } from "../utils/supabase";
 
-export default function InputMessage() {
-  const [personalisedId, setPersonalisedId] = useState("");
+const chooseNewId = () => {
   const { user } = useUser();
   const router = useRouter();
-  const handler = async (req, res) => {
-    // MUST CHECK LOGGED USER ID = ID
-    if (!!user) {
-      return res.status(401).send("Non autorizzato");
-    }
-
-    // abbiamo row level security sulla tabella profile, dunque usiamo cookie per far sapere a supabase chi vuole fare il pagamento
-    // cookie.parse: parse an HTTP Cookie header string and returning an object of all cookie name-value pairs. The str argument is the string representing a Cookie header value and options is an optional object containing additional parsing options.
-    const token = cookie.parse(req.headers.cookie)["sb:token"];
-
-    supabase.auth.session = () => ({
-      access_token: token,
-    });
-  };
+  const [Id, setId] = useState("");
+  // const userId = user ? user.id : null;
 
   const send = async (personalisedId) => {
-    if (personalisedId === "")
-      throw new Error("Il campo non può essere vuoto!");
-    const { error } = await supabase
-      .from("post")
-      .update({ personalised_id: { personalisedId } })
+    if (personalisedId === "") {
+      alert("Il campo non può essere vuoto!");
+      return;
+    }
+    const { data } = await supabase
+      .from("public.profile")
+      .update({ personalised_id: personalisedId })
       .eq("id", user.id);
-    if (error) throw error;
-    alert("Il tuo nome utente è stato modificato!");
-    router.push("/board");
+    console.log(data);
+    if (data) alert("Si è verificato un errore");
+    else {
+      alert("Il tuo nome utente è stato modificato!");
+      router.push("/board");
+    }
   };
 
   return (
@@ -43,24 +34,26 @@ export default function InputMessage() {
             <h2 className="font-semibold text-slate-500 text-2xl">
               Cambia la tua id:
             </h2>
-            <div>
+            <div className="py-5">
               <input
                 className="border-b-2"
                 type="text"
-                placeholder="Nome utente nuovo"
-                value={personalisedId}
-                onChange={(e) => setPersonalisedId(e.target.value)}
+                value={Id}
+                placeholder="Nome utente"
+                onChange={(e) => setId(e.target.value)}
               />
             </div>
             <div>
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  send(personalisedId);
+                  send(Id);
                 }}
                 className="py-4 text-sm font-medium"
               >
-                <span>Gotcha!</span>
+                <span className="p-4 border-2 rounded-xl border-slate-300 text-sm font-medium">
+                  Gotcha!
+                </span>
               </button>
             </div>
           </div>
@@ -68,4 +61,6 @@ export default function InputMessage() {
       </div>
     </div>
   );
-}
+};
+
+export default chooseNewId;

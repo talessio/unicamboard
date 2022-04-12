@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useUser } from "../context/user";
 
 const Login = () => {
-    const { login, isLoading } = useUser();
+    const { login } = useUser();
 
     useEffect(login, []);
 

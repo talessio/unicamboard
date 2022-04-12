@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useUser } from "../context/user";
 
 export default function Nav() {
-  const { user, isLoading } = useUser();
+  const { user } = useUser();
 
   return (
     <nav className="py-4 border-b border-slate-300 text-sm font-medium">
