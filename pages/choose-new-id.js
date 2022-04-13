@@ -7,25 +7,27 @@ const chooseNewId = () => {
   const { user } = useUser();
   const router = useRouter();
   const [Id, setId] = useState("");
-  const userId = user ? user.id : null;
+  let userId = user ? user.id : "";
 
-  const send = async (personalisedId) => {
-    if (personalisedId === "") {
+  const send = async (newId) => {
+    if (newId === "") {
       alert("Il campo non può essere vuoto!");
       return;
     }
+    console.log("I got ID: ", newId);
+    console.log("I got a user: ", user);
+    console.log("user id: ", user.id);
     const { data, error } = await supabase
       .from("profile")
-      .update({ personalised_id: personalisedId })
-      .eq("id", userId);
-    // .match({ id: user.id });
-    let d = data;
-    console.log(d);
-    if (error) alert("Si è verificato un errore");
-    else {
+      .update({ custom_id: newId })
+      .eq("id", user.id);
+    console.log("I have received ", data);
+    if (error) {
+      console.log(profile.custom_id);
+      alert("Si è verificato un errore");
+    } else {
       alert("Il tuo nome utente è stato modificato!");
       router.push("/board");
-      return d;
     }
   };
 
@@ -35,14 +37,15 @@ const chooseNewId = () => {
         <div className="w-90 max-w-3xl mx-auto py-16 flex justify-around">
           <div className="h-auto w-64 rounded text-center shadow px-6 py-4">
             <h2 className="font-semibold text-slate-500 text-2xl">
-              Cambia la tua id:
+              Cambia il tuo nome utente:
             </h2>
+            <p className="text-xs">Nome utente corrente: {userId}</p>
             <div className="py-4">
               <input
                 className="border-b-2 content-center w-fit"
                 type="text"
                 value={Id}
-                placeholder="Nome utente"
+                placeholder="Nuovo nome utente"
                 onChange={(e) => setId(e.target.value)}
               />
             </div>
@@ -50,11 +53,12 @@ const chooseNewId = () => {
               <button
                 onClick={(e) => {
                   e.preventDefault();
+                  console.log("I have an ID: ", Id);
                   send(Id);
                 }}
                 className="p-4 border-2 rounded-xl border-slate-300 text-sm font-medium"
               >
-                <span>Gotcha!</span>
+                <span>Conferma</span>
               </button>
             </div>
           </div>
