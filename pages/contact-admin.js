@@ -20,7 +20,7 @@ export default function contactAdmin() {
       const { error } = await supabase
         .from("admin_requests") // tabella con messaggi diretti all'amministrazione
         .insert({
-          profile_id: id, // non inserisce effettivamente il profile_id nemmeno usando user al posto di profile_id
+          profile_id: id,
           body: body,
           title: title,
         });
