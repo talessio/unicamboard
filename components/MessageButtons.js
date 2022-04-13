@@ -72,9 +72,7 @@ export const MessageButtons = ({ message }) => {
       } catch (error) {
         console.error(error.message);
       } finally {
-        setLikeCount(likeCount + 1);
         setLikeLoading(false);
-        setLiked(true);
       }
     };
 
@@ -89,16 +87,18 @@ export const MessageButtons = ({ message }) => {
       } catch (error) {
         console.error(error.message);
       } finally {
-        setLikeCount(likeCount - 1);
         setLikeLoading(false);
-        setLiked(false);
       }
     };
 
     const handleLike = async () => {
       if (!liked) {
+        setLiked(true);
+        setLikeCount(likeCount + 1);
         insertLike();
       } else {
+        setLiked(false);
+        setLikeCount(likeCount - 1);
         deleteLike();
       }
     };
@@ -165,9 +165,7 @@ export const MessageButtons = ({ message }) => {
       } catch (error) {
         console.error(error.message);
       } finally {
-        setDownvoteCount(downvoteCount + 1);
         setDownvoteLoading(false);
-        setDownvoted(true);
       }
     };
 
@@ -182,16 +180,18 @@ export const MessageButtons = ({ message }) => {
       } catch (error) {
         console.error(error.message);
       } finally {
-        setDownvoteCount(downvoteCount - 1);
         setDownvoteLoading(false);
-        setDownvoted(false);
       }
     };
 
     const handleDownvote = async () => {
       if (!downvoted) {
+        setDownvoted(true);
+        setDownvoteCount(downvoteCount + 1);
         insertDownvote();
       } else {
+        setDownvoted(false);
+        setDownvoteCount(downvoteCount - 1);
         deleteDownvote();
       }
     };
