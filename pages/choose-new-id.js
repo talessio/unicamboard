@@ -7,22 +7,25 @@ const chooseNewId = () => {
   const { user } = useUser();
   const router = useRouter();
   const [Id, setId] = useState("");
-  // const userId = user ? user.id : null;
+  const userId = user ? user.id : null;
 
   const send = async (personalisedId) => {
     if (personalisedId === "") {
       alert("Il campo non può essere vuoto!");
       return;
     }
-    const { data } = await supabase
-      .from("public.profile")
+    const { data, error } = await supabase
+      .from("profile")
       .update({ personalised_id: personalisedId })
-      .eq("id", user.id);
-    console.log(data);
-    if (data) alert("Si è verificato un errore");
+      .eq("id", userId);
+    // .match({ id: user.id });
+    let d = data;
+    console.log(d);
+    if (error) alert("Si è verificato un errore");
     else {
       alert("Il tuo nome utente è stato modificato!");
       router.push("/board");
+      return d;
     }
   };
 
@@ -34,9 +37,9 @@ const chooseNewId = () => {
             <h2 className="font-semibold text-slate-500 text-2xl">
               Cambia la tua id:
             </h2>
-            <div className="py-5">
+            <div className="py-4">
               <input
-                className="border-b-2"
+                className="border-b-2 content-center w-fit"
                 type="text"
                 value={Id}
                 placeholder="Nome utente"
@@ -49,11 +52,9 @@ const chooseNewId = () => {
                   e.preventDefault();
                   send(Id);
                 }}
-                className="py-4 text-sm font-medium"
+                className="p-4 border-2 rounded-xl border-slate-300 text-sm font-medium"
               >
-                <span className="p-4 border-2 rounded-xl border-slate-300 text-sm font-medium">
-                  Gotcha!
-                </span>
+                <span>Gotcha!</span>
               </button>
             </div>
           </div>
