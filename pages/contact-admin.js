@@ -28,60 +28,60 @@ export default function contactAdmin() {
         });
       if (error) throw error;
       router.push("/admin-message-confirm");
-      
     } catch (error) {
       alert(error.message);
     } finally {
       setLoading(false);
       setTitle("");
       setBody("");
-      
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <span className="text-md font-bold">
-        {"Inserisci qui un messaggio da inviare all'Aministrazione"}
-      </span>
-      <div className="flex flex-col items-center py-2">
-        <p className="text-md font-thin">
-          {
-            "L'Amministrazione provvederà al più presto a risolvere il tuo problema."
-          }
-        </p>
-      </div>
-      <div className="rounded-l py-2 px-4 font-medium">
-        <div>
-          <input
-            className="border-b-2"
-            type="text"
-            placeholder="Oggetto"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-        <br></br>
-        <div>
-          <input
-            className="border-b-2"
-            type="text"
-            placeholder="Corpo"
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-          />
-        </div>
-        <div>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              send(title, body);
-            }}
-            className="py-4 text-sm font-medium"
-            disabled={loading}
-          >
-            <span>{loading ? "Mandando..." : "Manda il tuo messaggio"}</span>
-          </button>
+    <div className="rounded-l py-2 px-4 font-medium">
+      <div className="text-center">
+        <div className="w-90 max-w-3xl mx-auto py-16 flex justify-around">
+          <div className="h-auto w-fill rounded text-center shadow px-6 py-4">
+            <h2 className="font-semibold text-slate-500 text-2xl">
+              Inserisci qui un messaggio da inviare all'Aministrazione
+            </h2>
+            <div className="text-md">
+              L'Amministrazione provvederà al più presto a risolvere il tuo
+              problema.
+            </div>
+            <div className="py-2">
+              <input
+                className="border-b-2 content-center w-fit"
+                type="text"
+                placeholder="Oggetto"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+            <div className="py-2">
+              <input
+                className="border-b-2 content-center w-fit"
+                type="text"
+                placeholder="Corpo"
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+              />
+            </div>
+            <div>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  send(title, body);
+                }}
+                className="p-4 text-lg font-medium"
+                disabled={loading}
+              >
+                <a>
+                  {loading ? "Mandando..." : "Manda il tuo messaggio"}
+                </a>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

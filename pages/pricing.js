@@ -11,27 +11,32 @@ const Pricing = ({ plans }) => {
   };
 
   return (
-    <div>
-      <div className="w-90 max-w-3xl mx-auto py-16 flex justify-around">
-        {plans.map((plan) => (
-          <div
-            key={plan.id}
-            className="h-auto w-64 rounded text-center shadow px-6 py-4"
-          >
-            <h2 className="font-semibold text-slate-500 text-2xl">
-              {plan.name}
-            </h2>
-            <div className="text-md">
-              {plan.description}
-              <br />
-              <button className="py-4" onClick={processPayment(plan.id)}>
-                € {plan.price / 100}
-                <br />
-                <a className="text-lg">Acquista</a>
-              </button>
-            </div>
+    <div className="rounded-l py-2 px-4 font-medium">
+      <div className="text-center">
+        <div className="w-90 max-w-3xl mx-auto py-16 flex justify-around">
+          <div className="h-auto w-fill rounded text-center shadow px-6 py-4">
+            {plans.map((plan) => (
+              <div
+                key={plan.id}
+                // className="h-auto w-fit rounded text-center shadow px-6 py-4"
+              >
+                <h2 className="font-semibold text-slate-500 text-2xl">
+                  {plan.name}
+                </h2>
+                <div className="text-md">{plan.description}</div>
+                <div className="py-2">€ {plan.price / 100}</div>
+                <div className="py-2">
+                  <button
+                    className="p-4 text-lg font-medium"
+                    onClick={processPayment(plan.id)}
+                  >
+                    <a>Acquista</a>
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );

@@ -29,11 +29,10 @@ const chooseNewId = () => {
     <div className="rounded-l py-2 px-4 font-medium">
       <div className="text-center">
         <div className="w-90 max-w-3xl mx-auto py-16 flex justify-around">
-          <div className="h-auto w-64 rounded text-center shadow px-6 py-4">
+          <div className="h-auto w-fill rounded text-center shadow px-6 py-4">
             <h2 className="font-semibold text-slate-500 text-2xl">
               Cambia il tuo nome utente:
             </h2>
-            <p className="text-xs">Nome utente corrente: {userId}</p>
             <div className="py-4">
               <input
                 className="border-b-2 content-center w-fit"
@@ -49,9 +48,9 @@ const chooseNewId = () => {
                   e.preventDefault();
                   send(Id);
                 }}
-                className="p-4 border-2 rounded-xl border-slate-300 text-sm font-medium"
+                className="p-4 text-lg font-medium"
               >
-                <span>Conferma</span>
+                <a>Conferma</a>
               </button>
             </div>
           </div>
