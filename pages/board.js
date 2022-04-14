@@ -1,12 +1,6 @@
 import Header from "../components/Header";
 import { supabase } from "../utils/supabase";
-import {
-  FaRegHeart,
-  FaHeart,
-  FaHeartBroken,
-  FaRegArrowAltCircleDown,
-  FaArrowAltCircleDown,
-} from "react-icons/fa";
+import { MessageButtons } from "../components/MessageButtons";
 
 export default function board({ messages }) {
   return (
@@ -27,13 +21,9 @@ export default function board({ messages }) {
             </div>
             <div className="flex flex-col items-center py-2">
               <p className="text-md font-thin">{message.body}</p>
-              <button className="hover:text-pink-400 font-extrabold self-center">
-                <FaRegHeart />
-                <FaHeart />
-                <FaHeartBroken />
-                <FaRegArrowAltCircleDown />
-                <FaArrowAltCircleDown />
-              </button>
+            </div>
+            <div>
+              <MessageButtons message={message}/>
             </div>
           </div>
         ))}
