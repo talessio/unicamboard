@@ -21,8 +21,7 @@ const chooseNewId = () => {
     if (error) {
       alert("Si è verificato un errore");
     } else {
-      alert("Il tuo nome utente è stato modificato!");
-      router.push("/board");
+      router.push("/custom-id-confirm");
     }
   };
 

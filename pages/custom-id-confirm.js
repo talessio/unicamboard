@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-const Cancel = () => {
+const CustomIdConfirm = () => {
   const router = useRouter();
 
   setTimeout(() => {
@@ -9,9 +9,9 @@ const Cancel = () => {
 
   return (
     <p className="justify-center py-10 text-center">
-      Pagamento annullato. Non ti è stato addebitato nulla!
+      Il tuo nome utente è stato modificato!
     </p>
   );
 };
 
-export default Cancel;
+export default CustomIdConfirm;

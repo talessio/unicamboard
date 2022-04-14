@@ -5,7 +5,7 @@ const Success = () => {
 
   setTimeout(() => {
     router.push("/choose-new-id");
-  }, 3000);
+  }, 2000);
 
   return (
     <p className="justify-center py-10 text-center">
