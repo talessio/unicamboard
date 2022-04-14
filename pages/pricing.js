@@ -4,8 +4,6 @@ import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 
 const Pricing = ({ plans }) => {
-  const { user } = useUser();
-
   const processPayment = (planId) => async () => {
     const { data } = await axios.get(`/api/payment/${planId}`);
     const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);

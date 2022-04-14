@@ -17,10 +17,11 @@ const chooseNewId = () => {
     console.log("I got ID: ", newId);
     console.log("I got a user: ", user);
     console.log("user id: ", user.id);
+    debugger
     const { data, error } = await supabase
       .from("profile")
       .update({ custom_id: newId })
-      .eq("id", user.id);
+      .match({ id: user.id });
     console.log("I have received ", data);
     if (error) {
       alert("Si è verificato un errore");
