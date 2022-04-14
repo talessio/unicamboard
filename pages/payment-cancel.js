@@ -4,7 +4,7 @@ const Cancel = () => {
   const router = useRouter();
 
   setTimeout(() => {
-    router.push("/choose-new-id");
+    router.push("/board");
   }, 3000);
 
   return (
