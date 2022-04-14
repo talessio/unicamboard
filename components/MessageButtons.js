@@ -8,12 +8,9 @@ import { useState } from "react";
 import { useUser } from "../context/user";
 import { supabase } from "../utils/supabase";
 
-//create reusable functions (initializeCount, initializeButton)
-
 export const MessageButtons = ({ message }) => {
   const { user } = useUser();
   if (!user) {
-    //umm rivedere questi statement per assegnare user.id message.id
     return null;
   }
   const id = user.id;
