@@ -32,6 +32,7 @@ const Provider = ({ children }) => {
       }
     };
 
+
     getUserProfile();
 
     //onAuthStateChange is only executed when we log in (and not when we log out), so we need to have login and logout in out user Provider.

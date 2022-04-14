@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import InputMessage from "../components/InputMessage";
 import { supabase } from "../utils/supabase";
 import { MessageButtons } from "../components/MessageButtons";
 
@@ -6,11 +7,12 @@ export default function board({ messages }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Header />
-      <div className="w-full border-2 border-slate-300 rounded-xl max-w-4xl flex flex-col space-y-4">
+      <InputMessage />
+      <div className="w-full max-w-4xl flex flex-col space-y-4">
         {messages.map((message) => (
           <div
             className="rounded-xl m-8 p-8 md:p-4 shadow-sm shadow-slate-300"
-            key={message.id}
+            key={message.engagement}
           >
             <div className="flex justify-between h-24 rounded-full mx-auto">
               <span className="text-sm">Utente: anonimo</span>
