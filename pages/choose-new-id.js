@@ -23,7 +23,6 @@ const chooseNewId = () => {
       .eq("id", user.id);
     console.log("I have received ", data);
     if (error) {
-      console.log(profile.custom_id);
       alert("Si è verificato un errore");
     } else {
       alert("Il tuo nome utente è stato modificato!");
