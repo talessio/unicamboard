@@ -6,7 +6,7 @@ const Logout = () => {
 
     useEffect(logout, []);
 
-    return <p>Logging out</p>;
+    return <p className="justify-center py-10 text-center">Sto uscendo</p>;
 };
 
 export default Logout;

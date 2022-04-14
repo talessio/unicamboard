@@ -10,10 +10,10 @@ export default function board({ messages }) {
         {messages.map((message) => (
           <div
             className="rounded-xl m-8 p-8 md:p-4 shadow-sm shadow-slate-300"
-            key={message.engagement}
+            key={message.id}
           >
             <div className="flex justify-between h-24 rounded-full mx-auto">
-              <span className="text-sm">Utente: {message.profile_id}</span>
+              <span className="text-sm">Utente: anonimo</span>
               <span className="text-sm">Interazioni: {message.engagement}</span>
             </div>
             <div className="text-center">

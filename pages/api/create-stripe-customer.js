@@ -13,7 +13,7 @@ const handler = async (req, res) => {
     });
 
     await supabase
-        .from("user")
+        .from("profile")
         .update({
             stripe_customer: customer.id,
         })
