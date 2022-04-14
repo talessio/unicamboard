@@ -1,30 +1,29 @@
-import Head from 'next/head';
+import Head from "next/head";
 
-//fare statica
 export default function Home() {
-
   return (
     <div>
       <Head>
         <title>UniCam Board</title>
-        <meta name="description" content="La bacheca dell'Università di Camerino" />
+        <meta
+          name="description"
+          content="La bacheca dell'Università di Camerino"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="flex flex-col items-center justify-center min-h-screen py-2">
-        <h1 className='font-bold text-slate-800 text-4xl'>
+        <h1 className="font-bold text-slate-800 text-4xl">
           <a>UniCam Board</a>
         </h1>
-        <h2 className='font-semibold text-slate-500 text-2xl'>
+        <h2 className="font-semibold text-slate-500 text-2xl">
           <a>Benvenuto nella bacheca dell'UniCam!</a>
         </h2>
       </main>
 
-      <footer className='border-2 border-slate-300'>
-        <a>
-          Un progetto Togepi
-        </a>
-      </footer>
+      <div className="border-y-2 border-slate-300 text-center p-5">
+        <a>Un progetto Togepi</a>
+      </div>
     </div>
-  )
+  );
 }
