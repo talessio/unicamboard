@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useUser } from "../context/user";
+import { useRouter } from "next/router";
 import { supabase } from "../utils/supabase";
 
 export default function contactAdmin() {
+  const router = useRouter();
   const { user } = useUser(); // to be used to properly insert profile_id field into db
   const id = user ? user.id : null;
   const [loading, setLoading] = useState(false);
@@ -25,15 +27,15 @@ export default function contactAdmin() {
           title: title,
         });
       if (error) throw error;
-      alert(
-        "Il tuo messaggio è stato mandato! L'amministrazione lo visualizzerà il prima possibile."
-      );
+      router.push("/admin-message-confirm");
+      
     } catch (error) {
       alert(error.message);
     } finally {
       setLoading(false);
       setTitle("");
       setBody("");
+      
     }
   };
 
