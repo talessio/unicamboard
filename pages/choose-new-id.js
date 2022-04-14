@@ -14,15 +14,10 @@ const chooseNewId = () => {
       alert("Il campo non può essere vuoto!");
       return;
     }
-    console.log("I got ID: ", newId);
-    console.log("I got a user: ", user);
-    console.log("user id: ", user.id);
-    debugger
     const { data, error } = await supabase
       .from("profile")
       .update({ custom_id: newId })
       .match({ id: user.id });
-    console.log("I have received ", data);
     if (error) {
       alert("Si è verificato un errore");
     } else {
@@ -53,7 +48,6 @@ const chooseNewId = () => {
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  console.log("I have an ID: ", Id);
                   send(Id);
                 }}
                 className="p-4 border-2 rounded-xl border-slate-300 text-sm font-medium"
