@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import InputMessage from "../components/InputMessage";
 import { supabase } from "../utils/supabase";
-import { BsSuitHeart } from "react-icons/bs";
+import { MessageButtons } from "../components/MessageButtons";
 
 export default function board({ messages }) {
   return (
@@ -15,7 +15,7 @@ export default function board({ messages }) {
             key={message.engagement}
           >
             <div className="flex justify-between h-24 rounded-full mx-auto">
-              <span className="text-sm">Utente: {message.user_id}</span>
+              <span className="text-sm">Utente: anonimo</span>
               <span className="text-sm">Interazioni: {message.engagement}</span>
             </div>
             <div className="text-center">
@@ -23,9 +23,9 @@ export default function board({ messages }) {
             </div>
             <div className="flex flex-col items-center py-2">
               <p className="text-md font-thin">{message.body}</p>
-              <button className="hover:text-pink-400 font-extrabold self-center">
-                <BsSuitHeart />
-              </button>
+            </div>
+            <div>
+              <MessageButtons message={message}/>
             </div>
           </div>
         ))}

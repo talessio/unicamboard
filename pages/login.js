@@ -6,7 +6,7 @@ const Login = () => {
 
     useEffect(login, []);
 
-    return <p>Logging in</p>;
+    return <p className="justify-center py-10 text-center">Sto facendo l'accesso</p>
 };
 
 export default Login;
