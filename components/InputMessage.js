@@ -28,7 +28,7 @@ export default function InputMessage() {
       }, 2000);
 
       alert(
-        "Il tuo messaggio è stato mandato! Ricarica la pagina per visualizzarlo sulla home."
+        "Il tuo messaggio è stato mandato! La pagina verrà aggiornata automaticamente."
       );
     } catch (error) {
       alert(error.message);
@@ -40,21 +40,23 @@ export default function InputMessage() {
   };
 
   return (
-    <div className="rounded-l py-2 px-4 font-medium">
+    <div className="h-auto w-fill text-center px-6 py-4">
+      <h2 className="font-semibold text-slate-500 text-2xl">
+        Scrivi un messaggio:
+      </h2>
       <p>utente: {user ? user.email : "ospite"}</p>
-      <div>
+      <div className="py-4">
         <input
-          className="border-b-2"
+          className="border-b-2 content-center w-fit"
           type="text"
           placeholder="Oggetto"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
-      <br></br>
       <div>
         <textarea
-          className="border-b-2"
+          className="border-b-2 content-center w-fit"
           placeholder="Corpo"
           value={body}
           onChange={(e) => setBody(e.target.value)}
@@ -66,7 +68,7 @@ export default function InputMessage() {
             e.preventDefault();
             send(title, body);
           }}
-          className="py-4 text-sm font-medium"
+          className="p-4 text-lg font-medium"
           disabled={loading}
         >
           <span>{loading ? "Mandando..." : "Manda il tuo messaggio"}</span>
