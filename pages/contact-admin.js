@@ -59,9 +59,8 @@ export default function contactAdmin() {
               />
             </div>
             <div className="py-2">
-              <input
+              <textarea
                 className="border-b-2 content-center w-fit"
-                type="text"
                 placeholder="Corpo"
                 value={body}
                 onChange={(e) => setBody(e.target.value)}

@@ -1,4 +1,3 @@
-import Header from "../components/Header";
 import InputMessage from "../components/InputMessage";
 import { supabase } from "../utils/supabase";
 import { MessageButtons } from "../components/MessageButtons";
@@ -6,7 +5,10 @@ import { MessageButtons } from "../components/MessageButtons";
 export default function board({ messages }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Header />
+      <div className="flex flex-col items-center py-2">
+        <h1 className="font-semibold text-slate-500 text-2xl">UniCam Board</h1>
+        <h2 className="text-xl">Benvenuto sulla tua bacheca.</h2>
+      </div>
       <InputMessage />
       <div className="w-full max-w-4xl flex flex-col space-y-4">
         {messages.map((message) => (
@@ -15,7 +17,9 @@ export default function board({ messages }) {
             key={message.engagement}
           >
             <div className="flex justify-between h-24 rounded-full mx-auto">
-              <span className="text-sm">Utente: anonimo</span>
+              <span className="text-sm">
+                Utente: anonimo
+              </span>
               <span className="text-sm">Interazioni: {message.engagement}</span>
             </div>
             <div className="text-center">
@@ -25,7 +29,7 @@ export default function board({ messages }) {
               <p className="text-md font-thin">{message.body}</p>
             </div>
             <div>
-              <MessageButtons message={message}/>
+              <MessageButtons message={message} />
             </div>
           </div>
         ))}
