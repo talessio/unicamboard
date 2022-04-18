@@ -1,6 +1,7 @@
 import { supabase } from "../utils/supabase"
 import { MessageButtons } from "../components/MessageButtons";
 // import { InputReply } from "../components/InputReply";
+import { DeletePostButton } from "../components/DeletePostButton";
 import { useState } from "react";
 import { useRouter } from "next/router"
 
@@ -47,6 +48,7 @@ const MessageBody = ({ message, replies }) => {
 					</span>
 					<span className="text-sm">Interazioni: {message.engagement}</span>
 				</div>
+				<DeletePostButton message={message} />
 				<div className="text-center">
 					<span className="text-lg font-bold">{message.title}</span>
 				</div>

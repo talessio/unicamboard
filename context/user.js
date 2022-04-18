@@ -21,6 +21,9 @@ const Provider = ({ children }) => {
           .eq("id", sessionUser.id)
           .single();
         if (!sessionUser.email.includes("@studenti.unicam.it")) {
+          //qui posso aggiungere statement per eliminare dal database l'utente appena creato
+          //(last resort per aggiungere feature email invalida)
+          
           //logout;
           router.push("/invalid-email");
         } else {
