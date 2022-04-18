@@ -1,6 +1,7 @@
 import InputMessage from "../components/InputMessage";
 import { supabase } from "../utils/supabase";
 import { MessageButtons } from "../components/MessageButtons";
+import Link from "next/link";
 
 export default function board({ messages }) {
   return (
@@ -14,7 +15,7 @@ export default function board({ messages }) {
         {messages.map((message) => (
           <div
             className="rounded-xl m-8 p-8 md:p-4 shadow-sm shadow-slate-300"
-            key={message.engagement}
+            key={message.id}
           >
             <div className="flex justify-between h-24 rounded-full mx-auto">
               <span className="text-sm">
@@ -28,6 +29,11 @@ export default function board({ messages }) {
             <div className="flex flex-col items-center py-2">
               <p className="text-md font-thin">{message.body}</p>
             </div>
+            <Link key={message.id} href={`/${message.id}`}>
+              <a>
+                Rispondi
+              </a>
+            </Link>
             <div>
               <MessageButtons message={message} />
             </div>
