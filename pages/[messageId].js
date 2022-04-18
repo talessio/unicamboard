@@ -4,15 +4,34 @@ import { MessageButtons } from "../components/MessageButtons";
 import { DeletePostButton } from "../components/DeletePostButton";
 import { useState } from "react";
 import { useRouter } from "next/router"
-import { useUser } from "../context/user";
 
-const MessageBody = ({ message, replies }) => {
+const ReplyPage = ({ message }) => {
 	const [user] = useState(supabase.auth.user());
 	const [body, setBody] = useState("");
 	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 
 	console.log({ message });
+	// console.log({ replies });
+
+	let replies;
+	const getPostReplies = async () => {
+		try {
+			const { data, error } = await supabase
+				.from("reply")
+				.select("*")
+				.eq("post_id", message.id)
+			if (error) throw error
+			replies = {
+				props: {
+					reply: data,
+				}
+			};
+		} catch (error) {
+			console.error(error.message);
+		}
+	}
+	getPostReplies();
 	console.log({ replies });
 
 	const handleSendReply = async (body) => {
@@ -37,6 +56,30 @@ const MessageBody = ({ message, replies }) => {
 		}
 	};
 
+	function renderReplies() {
+		if (replies) {
+			return replies.map((reply) => (
+				<div
+					className="rounded-xl m-8 p-8 md:p-4 shadow-sm shadow-slate-300"
+					key={message.id}
+				>
+					<div className="flex justify-between h-24 rounded-full mx-auto">
+						<span className="text-sm">
+							Utente: anonimo
+						</span>
+					</div>
+					<div className="flex flex-col items-center py-2">
+						<p className="text-md font-thin">{reply.body}</p>
+					</div>
+				</div>
+			))
+		} else return (
+			<div>
+				Ancora nessuno ha risposto a questo messaggio
+			</div>
+		)
+	}
+
 	return (
 		<div>
 			<div
@@ -60,22 +103,10 @@ const MessageBody = ({ message, replies }) => {
 					<MessageButtons message={message} />
 				</div>
 			</div>
-			{replies.map((reply) => (
-					<div
-						className="rounded-xl m-8 p-8 md:p-4 shadow-sm shadow-slate-300"
-						key={message.id}
-					>
-						<div className="flex justify-between h-24 rounded-full mx-auto">
-							<span className="text-sm">
-								Utente: anonimo
-							</span>
-						</div>
-						<div className="flex flex-col items-center py-2">
-							<p className="text-md font-thin">{reply.body}</p>
-						</div>
-					</div>
-				))}
-			{/* <InputReply /> */}
+
+
+			{renderReplies()}
+
 			<div>
 				<textarea
 					placeholder="Scrivi una risposta..."
@@ -99,30 +130,17 @@ const MessageBody = ({ message, replies }) => {
 	)
 }
 
-export const getUser = async () => {
-	const [user] = useUser(supabase.auth.user());
-	if (user) return user.id;
-}
-
 export const getServerSideProps = async ({ params: { messageId } }) => {
-	const userId = getUser();
-	console.log(userId);
 	const { data: message } = await supabase
 		.from("post")
 		.select("*")
 		.eq("id", messageId)
 		.single();
-	const { data: replies } = await supabase
-		.from("reply")
-		.select("*")
-		.eq("post_id", messageId)
-		.eq("profile_id", userId);
 	return {
 		props: {
 			message,
-			replies
 		},
 	};
 };
 
-export default MessageBody;
+export default ReplyPage;
