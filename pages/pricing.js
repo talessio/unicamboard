@@ -2,6 +2,8 @@ import initStripe from "stripe";
 import { useUser } from "../context/user";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
+import Protected from "../components/Protected";
+import { withProtected } from "../hooks/route";
 
 const Pricing = ({ plans }) => {
   const processPayment = (planId) => async () => {
@@ -11,34 +13,31 @@ const Pricing = ({ plans }) => {
   };
 
   return (
-    <div className="rounded-l py-2 px-4 font-medium">
-      <div className="text-center">
-        <div className="w-90 max-w-3xl mx-auto py-16 flex justify-around">
-          <div className="h-auto w-fill rounded text-center shadow px-6 py-4">
-            {plans.map((plan) => (
-              <div
-                key={plan.id}
-                // className="h-auto w-fit rounded text-center shadow px-6 py-4"
-              >
-                <h2 className="font-semibold text-slate-500 text-2xl">
-                  {plan.name}
-                </h2>
-                <div className="text-md">{plan.description}</div>
-                <div className="py-2">€ {plan.price / 100}</div>
-                <div className="py-2">
-                  <button
-                    className="p-4 text-lg font-medium"
-                    onClick={processPayment(plan.id)}
-                  >
-                    <a>Acquista</a>
-                  </button>
+      <div className="rounded-l py-2 px-4 font-medium">
+        <div className="text-center">
+          <div className="w-90 max-w-3xl mx-auto py-16 flex justify-around">
+            <div className="h-auto w-fill rounded text-center shadow px-6 py-4">
+              {plans.map((plan) => (
+                <div key={plan.id}>
+                  <h2 className="font-semibold text-slate-500 text-2xl">
+                    {plan.name}
+                  </h2>
+                  <div className="text-md">{plan.description}</div>
+                  <div className="py-2">€ {plan.price / 100}</div>
+                  <div className="py-2">
+                    <button
+                      className="p-4 text-lg font-medium"
+                      onClick={processPayment(plan.id)}
+                    >
+                      <a>Acquista</a>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
@@ -67,4 +66,4 @@ export const getStaticProps = async () => {
   };
 };
 
-export default Pricing;
+export default withProtected(Pricing);

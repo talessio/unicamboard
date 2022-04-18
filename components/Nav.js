@@ -19,13 +19,11 @@ export default function Nav() {
             </Link>
           </div>
         )}
-        {!!user && (
-          <div className="ml-2">
-            <Link href="/contact-admin">
-              <a>Contattaci</a>
-            </Link>
-          </div>
-        )}
+        <div className="ml-2">
+          <Link href="/contact-admin">
+            <a>Contattaci</a>
+          </Link>
+        </div>
         <div>
           <Link href={user ? "/logout" : "/login"}>
             <a>{user ? "Esci" : "Accedi"}</a>
