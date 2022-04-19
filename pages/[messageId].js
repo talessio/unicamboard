@@ -12,24 +12,16 @@ const ReplyPage = ({ message }) => {
 	const router = useRouter();
 
 	console.log({ message });
-	// console.log({ replies });
 
-	// let replies;
 	const getPostReplies = async () => {
-		try {
-			const { data, error } = await supabase
-				.from("reply")
-				.select("*")
-				.eq("post_id", message.id)
-			if (error) throw error
-			replies = {
-				props: {
-					reply: data,
-				},
-			};
-		} catch (error) {
-			console.error(error.message);
-		}
+		const { data: replies } = await supabase
+			.from("reply")
+			.select("*")
+			.eq("post_id", message.id);
+		console.log({ replies });
+		return {
+			reps: replies,
+		};
 	}
 	const replies = [getPostReplies()];
 	console.log({ replies });
@@ -105,25 +97,9 @@ const ReplyPage = ({ message }) => {
 			</div>
 
 
-			{/* {renderReplies()} */}
-			{replies.map((reply) => (
-			<div
-				className="rounded-xl m-8 p-8 md:p-4 shadow-sm shadow-slate-300"
-				key={message.id}
-			>
-				<div className="flex justify-between h-24 rounded-full mx-auto">
-					<span className="text-sm">
-						Utente: anonimo
-					</span>
-				</div>
-				<div className="flex flex-col items-center py-2">
-					<p className="text-md font-thin">{reply.body}</p>
-				</div>
-			</div>
-			))
-			}
+			{renderReplies()}
 
-			
+
 			<div>
 				<textarea
 					placeholder="Scrivi una risposta..."

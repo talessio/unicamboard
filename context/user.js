@@ -21,10 +21,19 @@ const Provider = ({ children }) => {
           .eq("id", sessionUser.id)
           .single();
         if (!sessionUser.email.includes("@studenti.unicam.it")) {
-          //qui posso aggiungere statement per eliminare dal database l'utente appena creato
-          //(last resort per aggiungere feature email invalida)
-          
           //logout;
+          try {
+            const { error } = await supabase
+              .from("profile")
+              .delete()
+              .match({
+                email: sessionUser.email
+              });
+            if (error) throw error;
+          } catch (error) {
+            console.error(error.message);
+          }
+
           router.push("/invalid-email");
         } else {
           setUser({

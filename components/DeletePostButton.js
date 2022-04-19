@@ -62,7 +62,9 @@ export const DeletePostButton = ({ message }) => {
     } catch (error) {
       console.error(error.message);
     } finally {
-      router.push("/board");
+      setTimeout(() => {
+        router.push("/board");
+      }, 2000);
     }
   }
 
