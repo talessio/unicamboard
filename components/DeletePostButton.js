@@ -33,10 +33,38 @@ export const DeletePostButton = ({ message }) => {
 
   postIsActuallyUsersOwn();
 
-  async function purgePostRepliesFirst() {
+  async function purgePostReplies() {
     try {
       const { error } = await supabase
-        .from("replies")
+        .from("reply")
+        .delete()
+        .match({
+          post_id: message.id
+        })
+        if (error) throw error;
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  async function purgePostLikes() {
+    try {
+      const { error } = await supabase
+        .from("like")
+        .delete()
+        .match({
+          post_id: message.id
+        })
+        if (error) throw error;
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  async function purgePostDownvotes() {
+    try {
+      const { error } = await supabase
+        .from("downvote")
         .delete()
         .match({
           post_id: message.id
@@ -48,7 +76,9 @@ export const DeletePostButton = ({ message }) => {
   }
 
   async function handleClick() {
-    purgePostRepliesFirst();
+    purgePostLikes();
+    purgePostDownvotes();
+    purgePostReplies();
     try {
       setDeleted(true);
       const { error } = await supabase
