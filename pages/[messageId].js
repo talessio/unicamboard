@@ -14,7 +14,7 @@ const ReplyPage = ({ message }) => {
 	console.log({ message });
 	// console.log({ replies });
 
-	let replies;
+	// let replies;
 	const getPostReplies = async () => {
 		try {
 			const { data, error } = await supabase
@@ -25,13 +25,13 @@ const ReplyPage = ({ message }) => {
 			replies = {
 				props: {
 					reply: data,
-				}
+				},
 			};
 		} catch (error) {
 			console.error(error.message);
 		}
 	}
-	getPostReplies();
+	const replies = [getPostReplies()];
 	console.log({ replies });
 
 	const handleSendReply = async (body) => {
@@ -105,8 +105,25 @@ const ReplyPage = ({ message }) => {
 			</div>
 
 
-			{renderReplies()}
+			{/* {renderReplies()} */}
+			{replies.map((reply) => (
+			<div
+				className="rounded-xl m-8 p-8 md:p-4 shadow-sm shadow-slate-300"
+				key={message.id}
+			>
+				<div className="flex justify-between h-24 rounded-full mx-auto">
+					<span className="text-sm">
+						Utente: anonimo
+					</span>
+				</div>
+				<div className="flex flex-col items-center py-2">
+					<p className="text-md font-thin">{reply.body}</p>
+				</div>
+			</div>
+			))
+			}
 
+			
 			<div>
 				<textarea
 					placeholder="Scrivi una risposta..."
