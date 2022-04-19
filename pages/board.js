@@ -14,7 +14,7 @@ export default function board({ messages }) {
         {messages.map((message) => (
           <div
             className="rounded-xl m-8 p-8 md:p-4 shadow-sm shadow-slate-300"
-            key={message.engagement}
+            key={message.id}
           >
             <div className="flex justify-between h-24 rounded-full mx-auto">
               <span className="text-sm">
@@ -41,7 +41,7 @@ export default function board({ messages }) {
 export const getServerSideProps = async () => {
   const { data: messages } = await supabase.from("post").select("*");
 
-  const sortedMessages = messages.sort((a, b) => a.engagement + b.engagement);
+  const sortedMessages = messages.sort((a, b) => a.engagement > b.engagement);
 
   return {
     props: {

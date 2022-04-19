@@ -7,6 +7,7 @@ export default function contactAdmin() {
   const router = useRouter();
   const { user } = useUser(); // to be used to properly insert profile_id field into db
   const id = user ? user.id : null;
+  console.log(user.id);
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -43,7 +44,7 @@ export default function contactAdmin() {
         <div className="w-90 max-w-3xl mx-auto py-16 flex justify-around">
           <div className="h-auto w-fill rounded text-center shadow px-6 py-4">
             <h2 className="font-semibold text-slate-500 text-2xl">
-              Inserisci qui un messaggio da inviare all'Aministrazione
+              Inserisci qui un messaggio da inviare all'Amministrazione
             </h2>
             <div className="text-md">
               L'Amministrazione provvederà al più presto a risolvere il tuo
