@@ -1,19 +1,8 @@
-import CookieConsent from "react-cookie-consent";
 import Head from "next/head";
 
 export default function Home() {
   return (
     <div>
-      <CookieConsent
-        location="bottom"
-        buttonText="OK"
-        style={{ background: "#2B373B" }}
-        buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
-        expires={150}
-      >
-        UniCam Board utilizza solo i cookie strettamente necessari al corretto
-        funzionamento del sito.
-      </CookieConsent>
       <Head>
         <title>UniCam Board</title>
         <meta
