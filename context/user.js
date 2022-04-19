@@ -20,18 +20,17 @@ const Provider = ({ children }) => {
           .select("*")
           .eq("id", sessionUser.id)
           .single();
-        if (!sessionUser.email.includes("@studenti.unicam.it")) {
-          //logout;
-          router.push("/invalid-email");
-        } else {
+        // if (!sessionUser.email.includes("@studenti.unicam.it")) {
+        //   //logout;
+        //   router.push("/invalid-email");
+        // } else {
           setUser({
             ...sessionUser, //prendo tutti i campi dell'utente che ha fatto login
             ...profile, //prendo tutti i campi dell'utente nella tabella profile di supabase
           });
-        }
+        // }
       }
     };
-
 
     getUserProfile();
 

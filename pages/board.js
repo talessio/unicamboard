@@ -1,8 +1,10 @@
 import InputMessage from "../components/InputMessage";
 import { supabase } from "../utils/supabase";
 import { MessageButtons } from "../components/MessageButtons";
+import { withProtected } from "../hooks/route";
 
-export default function board({ messages }) {
+function Board({ messages }) {
+// export default function Board({ messages }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <div className="flex flex-col items-center py-2">
@@ -14,12 +16,10 @@ export default function board({ messages }) {
         {messages.map((message) => (
           <div
             className="rounded-xl m-8 p-8 md:p-4 shadow-sm shadow-slate-300"
-            key={message.engagement}
+            key={message.id}
           >
             <div className="flex justify-between h-24 rounded-full mx-auto">
-              <span className="text-sm">
-                Utente: anonimo
-              </span>
+              <span className="text-sm">Utente: anonimo</span>
               <span className="text-sm">Interazioni: {message.engagement}</span>
             </div>
             <div className="text-center">
@@ -49,3 +49,5 @@ export const getServerSideProps = async () => {
     },
   };
 };
+
+export default withProtected(Board);

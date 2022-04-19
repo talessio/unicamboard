@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useUser } from "../context/user";
+import { withProtected } from "../hooks/route";
 
 const Logout = () => {
-    const { logout } = useUser();
+  const { logout } = useUser();
 
-    useEffect(logout, []);
+  useEffect(logout, []);
 
-    return <p className="justify-center py-10 text-center">Sto uscendo</p>;
+  return <p className="justify-center py-10 text-center">Sto uscendo</p>;
 };
 
-export default Logout;
+export default withProtected(Logout);
+// export default Logout;
