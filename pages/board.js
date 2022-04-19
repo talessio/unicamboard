@@ -1,10 +1,11 @@
 import InputMessage from "../components/InputMessage";
 import { supabase } from "../utils/supabase";
 import { MessageButtons } from "../components/MessageButtons";
+import Link from "next/link";
 import { withProtected } from "../hooks/route";
 
+
 function Board({ messages }) {
-// export default function Board({ messages }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <div className="flex flex-col items-center py-2">
@@ -28,6 +29,11 @@ function Board({ messages }) {
             <div className="flex flex-col items-center py-2">
               <p className="text-md font-thin">{message.body}</p>
             </div>
+            <Link key={message.id} href={`/${message.id}`}>
+              <a>
+                Rispondi
+              </a>
+            </Link>
             <div>
               <MessageButtons message={message} />
             </div>
