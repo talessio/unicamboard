@@ -36,8 +36,8 @@ const handler = async (req, res) => {
         mode: "payment",
         payment_method_types: ["card"],
         line_items: lineItems,
-        success_url: "http://localhost:3000/payment-success",
-        cancel_url: "http://localhost:3000/payment-cancel"
+        success_url: `${process.env.CLIENT_URL}/payment-success`,
+        cancel_url: `${process.env.CLIENT_URL}/payment-cancel`
     });
 
     res.send({ id: session.id, });

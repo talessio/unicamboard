@@ -20,7 +20,7 @@ const Provider = ({ children }) => {
           .select("*")
           .eq("id", sessionUser.id)
           .single();
-        if (!sessionUser.email.includes("@studenti.unicam.it")) {
+        if (!sessionUser.email.includes("unicam.it")) {
           //logout;
           try {
             const { error } = await supabase.from("profile").delete().match({
@@ -61,7 +61,7 @@ const Provider = ({ children }) => {
       {
         provider: "google",
       },
-      { redirectTo: "http://localhost:3000/board" }
+      { redirectTo: `${process.env.CLIENT_URL}/board` }
     );
   };
 
