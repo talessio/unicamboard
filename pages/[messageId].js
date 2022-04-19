@@ -5,25 +5,13 @@ import { DeletePostButton } from "../components/DeletePostButton";
 import { useState } from "react";
 import { useRouter } from "next/router"
 
-const ReplyPage = ({ message }) => {
+const ReplyPage = ({ message, replies }) => {
 	const [user] = useState(supabase.auth.user());
 	const [body, setBody] = useState("");
 	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 
 	console.log({ message });
-
-	const getPostReplies = async () => {
-		const { data: replies } = await supabase
-			.from("reply")
-			.select("*")
-			.eq("post_id", message.id);
-		console.log({ replies });
-		return {
-			reps: replies,
-		};
-	}
-	const replies = [getPostReplies()];
 	console.log({ replies });
 
 	const handleSendReply = async (body) => {
@@ -49,27 +37,21 @@ const ReplyPage = ({ message }) => {
 	};
 
 	function renderReplies() {
-		if (replies) {
-			return replies.map((reply) => (
-				<div
-					className="rounded-xl m-8 p-8 md:p-4 shadow-sm shadow-slate-300"
-					key={message.id}
-				>
-					<div className="flex justify-between h-24 rounded-full mx-auto">
-						<span className="text-sm">
-							Utente: anonimo
-						</span>
-					</div>
-					<div className="flex flex-col items-center py-2">
-						<p className="text-md font-thin">{reply.body}</p>
-					</div>
+		return replies.map((reply) => (
+			<div
+				className="rounded-xl m-8 p-8 md:p-4 shadow-sm shadow-slate-300"
+				key={message.id}
+			>
+				<div className="flex justify-between h-24 rounded-full mx-auto">
+					<span className="text-sm">
+						Utente: anonimo
+					</span>
 				</div>
-			))
-		} else return (
-			<div>
-				Ancora nessuno ha risposto a questo messaggio
+				<div className="flex flex-col items-center py-2">
+					<p className="text-md font-thin">{reply.body}</p>
+				</div>
 			</div>
-		)
+		))
 	}
 
 	return (
@@ -96,9 +78,7 @@ const ReplyPage = ({ message }) => {
 				</div>
 			</div>
 
-
 			{renderReplies()}
-
 
 			<div>
 				<textarea
@@ -129,9 +109,14 @@ export const getServerSideProps = async ({ params: { messageId } }) => {
 		.select("*")
 		.eq("id", messageId)
 		.single();
+	const { data: replies } = await supabase
+		.from("reply")
+		.select("*")
+		.eq("post_id", message.id);
 	return {
 		props: {
 			message,
+			replies
 		},
 	};
 };
