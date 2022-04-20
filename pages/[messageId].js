@@ -2,6 +2,7 @@ import { supabase } from "../utils/supabase";
 import { MessageButtons } from "../components/MessageButtons";
 // import { InputReply } from "../components/InputReply";
 import { DeletePostButton } from "../components/DeletePostButton";
+import { withProtected } from "../hooks/route";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
@@ -123,4 +124,4 @@ export const getServerSideProps = async ({ params: { messageId } }) => {
   };
 };
 
-export default ReplyPage;
+export default withProtected(ReplyPage);

@@ -2,7 +2,6 @@ import initStripe from "stripe";
 import { useUser } from "../context/user";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
-import Protected from "../components/Protected";
 import { withProtected } from "../hooks/route";
 
 const Pricing = ({ plans }) => {

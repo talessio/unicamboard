@@ -1,3 +1,4 @@
+import { withProtected } from "../hooks/route";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useUser } from "../context/user";
@@ -60,4 +61,4 @@ const chooseNewId = () => {
   );
 };
 
-export default chooseNewId;
+export default withProtected(chooseNewId);
