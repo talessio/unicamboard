@@ -89,11 +89,11 @@ export const MessageButtons = ({ message }) => {
     };
 
     const handleLike = async () => {
-      if (!liked) {
+      if (!liked && !downvoted){
         setLiked(true);
         setLikeCount(likeCount + 1);
         insertLike();
-      } else {
+      } else if(liked){
         setLiked(false);
         setLikeCount(likeCount - 1);
         deleteLike();
@@ -182,11 +182,11 @@ export const MessageButtons = ({ message }) => {
     };
 
     const handleDownvote = async () => {
-      if (!downvoted) {
+      if (!downvoted && !liked) {
         setDownvoted(true);
         setDownvoteCount(downvoteCount + 1);
         insertDownvote();
-      } else {
+      } else if(downvoted){
         setDownvoted(false);
         setDownvoteCount(downvoteCount - 1);
         deleteDownvote();
