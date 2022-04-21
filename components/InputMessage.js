@@ -7,6 +7,7 @@ export default function InputMessage() {
   const { user } = useUser();
   const router = useRouter();
   const id = user ? user.id : null;
+  const cus = user ? user.custom_id : "utente anonimo";
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [loading, setLoading] = useState(false);
@@ -43,7 +44,7 @@ export default function InputMessage() {
     <div className="h-auto w-fill text-center px-6 py-4">
       <h2 className="text-lg font-bold">Scrivi un messaggio:</h2>
       <p className="text-sm">
-        Stai postando come: utente anonimo
+        Stai postando come: {cus}
         {/* {user.custom_id !== null ? user.custom_id : "utente anonimo"} */}
       </p>
       <div className="py-4">
