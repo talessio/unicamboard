@@ -61,7 +61,7 @@ const Provider = ({ children }) => {
       {
         provider: "google",
       },
-      { redirectTo: "http://localhost:3000/board" }
+      //{ redirectTo: "http://localhost:3000/board" }
     );
   };
 
