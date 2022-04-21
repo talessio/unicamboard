@@ -1,19 +1,23 @@
 import { supabase } from "../utils/supabase";
 import { MessageButtons } from "../components/MessageButtons";
-// import { InputReply } from "../components/InputReply";
 import { DeletePostButton } from "../components/DeletePostButton";
 import { withProtected } from "../hooks/route";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useUser } from "../context/user";
 
 const ReplyPage = ({ message, replies }) => {
-  const [user] = useState(supabase.auth.user());
+  const { user } = useUser();
   const [body, setBody] = useState("");
+  const [customId, setCustomId] = useState("Utente anonimo");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  console.log({ message });
-  console.log({ replies });
+  useEffect(() => {
+    if (customId === "Utente anonimo" && user && user.custom_id) {
+      setCustomId(user.custom_id);
+    }
+  });
 
   const handleSendReply = async (body) => {
     try {
@@ -24,6 +28,7 @@ const ReplyPage = ({ message, replies }) => {
         body: body,
         profile_id: user.id,
         post_id: message.id,
+        nickname: customId,
       });
       if (error) throw error;
       router.push(`/${message.id}`);
@@ -39,10 +44,10 @@ const ReplyPage = ({ message, replies }) => {
     return replies.map((reply) => (
       <div
         className="rounded-xl m-8 p-8 md:p-4 shadow-sm shadow-slate-300"
-        key={message.id}
+        key={reply.id}
       >
         <div className="flex justify-between h-24 rounded-full mx-auto">
-          <span className="text-sm">Utente: anonimo</span>
+          <span className="text-sm">{reply.nickname}</span>
         </div>
         <div className="flex flex-col items-center py-2">
           <p className="text-md font-thin">{reply.body}</p>
@@ -58,7 +63,9 @@ const ReplyPage = ({ message, replies }) => {
         key={message.id}
       >
         <div className="flex justify-between h-24 rounded-full mx-auto">
-          <span className="text-sm">Utente: anonimo</span>
+          <span className="text-sm">
+            {message.nickname}
+          </span>
           <span className="text-sm">Interazioni: {message.engagement}</span>
         </div>
         <DeletePostButton message={message} />
@@ -77,10 +84,7 @@ const ReplyPage = ({ message, replies }) => {
 
       <div className="h-auto w-fill text-center px-6 py-4">
         <h2 className="text-lg font-bold">Scrivi una risposta:</h2>
-        <p className="text-sm">
-          Stai postando come: utente anonimo
-          {/* {user.custom_id !== null ? user.custom_id : "utente anonimo"} */}
-        </p>
+        <p className="text-sm">Stai postando come: {customId}</p>
         <div className="py-4">
           <textarea
             className="border-b-2 content-center w-fit"
@@ -95,7 +99,7 @@ const ReplyPage = ({ message, replies }) => {
               e.preventDefault();
               handleSendReply(body);
             }}
-			className="p-4 font-medium"
+            className="p-4 font-medium"
             disabled={loading}
           >
             <span>{loading ? "Mandando..." : "Rispondi"}</span>
