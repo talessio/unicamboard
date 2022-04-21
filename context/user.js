@@ -61,7 +61,7 @@ const Provider = ({ children }) => {
       {
         provider: "google",
       },
-      { redirectTo: `${process.env.CLIENT_URL}/board` }
+      { redirectTo: "http://localhost:3000/board" }
     );
   };
 

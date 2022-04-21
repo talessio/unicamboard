@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useUser } from "../context/user";
-import { withPublic } from "../hooks/route";
 
 const Login = () => {
   const { login } = useUser();
@@ -12,5 +11,4 @@ const Login = () => {
   );
 };
 
-export default withPublic(Login);
-// export default Login;
+export default Login;

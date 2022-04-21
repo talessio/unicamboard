@@ -12,7 +12,7 @@ export function withPublic(Component) {
       router.replace("/board");
       return (
         <p className="justify-center py-10 text-center">
-          Sto facendo l'accesso
+          Accedendo alla bacheca...
         </p>
       );
     }

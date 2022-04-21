@@ -10,8 +10,9 @@ export default function contactAdmin() {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [email, setEmail] = useState("");
 
-  const send = async (title, body) => {
+  const send = async (title, body, email) => {
     // user
     try {
       setLoading(true);
@@ -25,6 +26,7 @@ export default function contactAdmin() {
           profile_id: id,
           body: body,
           title: title,
+          email: email,
         });
       if (error) throw error;
       router.push("/admin-message-confirm");
@@ -34,6 +36,7 @@ export default function contactAdmin() {
       setLoading(false);
       setTitle("");
       setBody("");
+      setEmail("");
     }
   };
 
@@ -66,11 +69,21 @@ export default function contactAdmin() {
                 onChange={(e) => setBody(e.target.value)}
               />
             </div>
+            <p>Se vorresti ricevere risposta lasciaci il tuo indirizzo e-mail:</p>
+            <div className="py-2">
+              <input
+                className="border-b-2 content-center w-fit"
+                type="text"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
             <div>
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  send(title, body);
+                  send(title, body, email);
                 }}
                 className="p-4 text-lg font-medium"
                 disabled={loading}

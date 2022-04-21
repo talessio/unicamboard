@@ -1,6 +1,7 @@
 import initStripe from "stripe";
 import { supabase } from "../../utils/supabase";
 
+// this happens server-side
 const handler = async (req, res) => {
     if (req.query.API_ROUTE_SECRET !== process.env.API_ROUTE_SECRET) {
         return res.status(401).send("Non sei autorizzato a chiamare questa API");
@@ -22,4 +23,4 @@ const handler = async (req, res) => {
     res.send({ message: `stripe customer created: ${customer.id}` });
 };
 
-export default handler;
+export default handler; 
