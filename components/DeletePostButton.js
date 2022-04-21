@@ -86,7 +86,6 @@ export const DeletePostButton = ({ message }) => {
         .delete()
         .match({
           id: message.id,
-          profile_id: user.id
         })
       if (error) throw error;
     } catch (error) {
@@ -94,7 +93,7 @@ export const DeletePostButton = ({ message }) => {
     } finally {
       setTimeout(() => {
         router.push("/board");
-      }, 2000);
+      }, 1000);
     }
   }
 
