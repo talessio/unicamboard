@@ -28,7 +28,7 @@ const ReplyPage = ({ message, replies }) => {
         body: body,
         profile_id: user.id,
         post_id: message.id,
-        nickname: customId,
+        custom_id: customId,
       });
       if (error) throw error;
       router.push(`/${message.id}`);
@@ -47,7 +47,7 @@ const ReplyPage = ({ message, replies }) => {
         key={reply.id}
       >
         <div className="flex justify-between h-24 rounded-full mx-auto">
-          <span className="text-sm">{reply.nickname}</span>
+          <span className="text-sm">{reply.custom_id}</span>
         </div>
         <div className="flex flex-col items-center py-2">
           <p className="text-md font-thin">{reply.body}</p>
@@ -64,7 +64,7 @@ const ReplyPage = ({ message, replies }) => {
       >
         <div className="flex justify-between h-24 rounded-full mx-auto">
           <span className="text-sm">
-            {message.nickname}
+            {message.custom_id}
           </span>
           <span className="text-sm">Interazioni: {message.engagement}</span>
         </div>

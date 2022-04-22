@@ -20,8 +20,8 @@ function Board({ messages }) {
             key={message.id}
           >
             <div className="flex justify-between h-24 rounded-full mx-auto">
-              <span className="text-sm">Utente: {message.nickname ===
-                "Utente anonimo" ? "anonimo" : message.nickname}</span>
+              <span className="text-sm">Utente: {message.custom_id ===
+                "Utente anonimo" ? "anonimo" : message.custom_id}</span>
               <span className="text-sm">Interazioni: {message.engagement}</span>
             </div>
             <div className="text-center">

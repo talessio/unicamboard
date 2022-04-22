@@ -27,7 +27,7 @@ export default function InputMessage() {
         title: title,
         body: body,
         profile_id: id,
-        nickname: customId,
+        custom_id: customId,
       });
       if (error) throw error;
 
