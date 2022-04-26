@@ -5,7 +5,7 @@ export default function Nav() {
   const { user } = useUser();
 
   return (
-    <nav className="py-4 border-b border-slate-300 text-sm font-medium">
+    <nav className="py-4 border-b-2 border-slate-300 text-sm font-medium">
       <ul className="flex space-x-5 justify-center">
         <div className="ml-2">
           <Link href={user ? "/board" : "/"}>
